@@ -1,0 +1,8 @@
+com/example/RegisterPage.class
+com/example/HomePage.class
+com/example/CadastroELoginUsuarioTest.class
+com/example/InvalidLoginTest.class
+com/example/InvalidLoginWithPOMTest.class
+com/example/ScreenshotOnFailure.class
+com/example/BaseTest.class
+com/example/LoginTest.class

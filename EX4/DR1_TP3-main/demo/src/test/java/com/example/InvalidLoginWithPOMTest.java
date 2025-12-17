@@ -1,18 +1,23 @@
 package com.example;
 
-import com.example.pages.HomePage;
-import com.example.pages.RegisterPage;
-import com.example.pages.LoginPage;
+import java.time.Duration;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.WebElement;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.example.pages.HomePage;
+import com.example.pages.LoginPage;
+import com.example.pages.RegisterPage;
 
 public class InvalidLoginWithPOMTest extends BaseTest {
+
+    @RegisterExtension
+    ScreenshotOnFailure watcher = new ScreenshotOnFailure(driver);
 
     @Test
     void cadastroETentativasLoginInvalidas() {
@@ -33,10 +38,13 @@ public class InvalidLoginWithPOMTest extends BaseTest {
         register.preencherFormulario("Test", "User", emailValido, senhaValida);
         register.clicarRegister();
 
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
         WebElement mensagemRegistro = wait.until(
-                ExpectedConditions.visibilityOf(register.obterMensagemSucesso())
+                ExpectedConditions.visibilityOfElementLocated(register.successMessageLocator())
         );
-        assertTrue(register.obterMensagemSucesso().contains("Your registration completed"));
+
+        assertTrue(mensagemRegistro.getText().contains("Your registration completed"));
 
         driver.findElement(By.className("ico-logout")).click();
 

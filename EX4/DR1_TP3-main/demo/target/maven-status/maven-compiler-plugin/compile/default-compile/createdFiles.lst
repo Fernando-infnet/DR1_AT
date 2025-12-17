@@ -1,2 +1,5 @@
-com/example/CookieUtils.class
+com/example/pages/LoginPage.class
 com/example/Main.class
+com/example/CookieUtils.class
+com/example/pages/RegisterPage.class
+com/example/pages/HomePage.class
